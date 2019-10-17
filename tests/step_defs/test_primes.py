@@ -33,7 +33,6 @@ def check_for_prime(number_under_test):
 
 @then('it passes')
 def should_pass(number_under_test):
-    print(number_under_test['number'])
     assert number_under_test['is_prime'] is True
 
 
@@ -48,5 +47,4 @@ def test_composed():
 
 @then('it doesn\'t pass')
 def should_not_pass(number_under_test):
-    print(number_under_test['number'])
     assert number_under_test['is_prime'] is not True
