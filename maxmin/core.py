@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """LCM, GCD module."""
 
-from typing import Generator, Union
-
 from math import ceil, sqrt
+from typing import Generator, Union
 
 
 def is_prime(number: int) -> bool:
@@ -58,3 +57,54 @@ def generate_prime_factors(number: int) -> Generator[int, None, None]:
                 abs_number = int(abs_number / last_prime)
             else:
                 last_prime = get_next_generated_value_or_none(primes)
+
+
+def gcd(number_a: int, number_b: int) -> int:
+    """Returns the greatest common divisor of its arguments."""
+    result = 1
+
+    a_factors = generate_prime_factors(number_a)
+    b_factors = generate_prime_factors(number_b)
+
+    a_factor = get_next_generated_value_or_none(a_factors)
+    b_factor = get_next_generated_value_or_none(b_factors)
+
+    while a_factor is not None and b_factor is not None:
+        if a_factor == b_factor:
+            result *= a_factor
+            a_factor = get_next_generated_value_or_none(a_factors)
+            b_factor = get_next_generated_value_or_none(b_factors)
+        elif a_factor < b_factor:
+            a_factor = get_next_generated_value_or_none(a_factors)
+        else:
+            b_factor = get_next_generated_value_or_none(b_factors)
+
+    return result
+
+
+def lcm(number_a: int, number_b: int) -> int:
+    """Returns the least common multiple of its arguments."""
+    result = 1
+
+    a_factors = generate_prime_factors(number_a)
+    b_factors = generate_prime_factors(number_b)
+
+    a_factor = get_next_generated_value_or_none(a_factors)
+    b_factor = get_next_generated_value_or_none(b_factors)
+
+    while a_factor is not None or b_factor is not None:
+        if a_factor is None:
+            result *= b_factor
+            b_factor = get_next_generated_value_or_none(b_factors)
+        elif b_factor is None or a_factor < b_factor:
+            result *= a_factor
+            a_factor = get_next_generated_value_or_none(a_factors)
+        elif b_factor < a_factor:
+            result *= b_factor
+            b_factor = get_next_generated_value_or_none(b_factors)
+        else:
+            result *= a_factor
+            a_factor = get_next_generated_value_or_none(a_factors)
+            b_factor = get_next_generated_value_or_none(b_factors)
+
+    return result
