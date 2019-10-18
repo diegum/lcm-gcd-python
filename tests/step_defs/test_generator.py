@@ -41,6 +41,6 @@ def generated_primes(number_under_test, primes):
     prime_generator = number_under_test['primes']
     for prime in prime_generator:
         assert index < len(prime_list), "Unexpected primes generated"
-        assert prime == prime_list[index], "Generated prime different thatn expected"
+        assert prime == prime_list[index], "Generated prime different than expected"
         index += 1
-    assert index == len(prime_list), "More generated primes expected"
+    assert index == len(prime_list), "More primes expected"
