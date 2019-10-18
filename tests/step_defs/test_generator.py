@@ -3,13 +3,12 @@
 Prime generator tests.
 """
 
-
 # pylint: disable=C0116, W0621
 
 
 from ast import literal_eval
-from pytest_bdd import given, when, then, scenario
 
+from pytest_bdd import given, when, then, scenario
 
 from ..context import maxmin
 
