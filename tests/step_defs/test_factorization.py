@@ -30,7 +30,9 @@ def number_under_test(number):
 
 @when('submitted to prime factorization')
 def generate_prime_factors(number_under_test):
-    number_under_test['prime_factors'] = maxmin.generate_prime_factors(number_under_test['number'])
+    number_under_test['prime_factors'] = maxmin.generate_prime_factors(
+        number_under_test['number']
+    )
 
 
 @then('it generates its <prime_factors>')
@@ -40,6 +42,7 @@ def generated_prime_factors(number_under_test, prime_factors):
     prime_factor_generator = number_under_test['prime_factors']
     for factor in prime_factor_generator:
         assert index < len(prime_list), "Unexpected factors generated"
-        assert factor == prime_list[index], "Generated factor different than expected"
+        assert factor == prime_list[index], \
+            "Generated factor different than expected"
         index += 1
     assert index == len(prime_list), "More prime factors expected"

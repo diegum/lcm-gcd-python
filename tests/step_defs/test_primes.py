@@ -28,7 +28,9 @@ def number_under_test(number):
 
 @when('checked for prime')
 def check_for_prime(number_under_test):
-    number_under_test['is_prime'] = maxmin.is_prime(number_under_test['number'])
+    number_under_test['is_prime'] = maxmin.is_prime(
+        number_under_test['number']
+    )
 
 
 @then('it passes')
