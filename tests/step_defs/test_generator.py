@@ -30,7 +30,9 @@ def number_under_test(number):
 
 @when('submitted to prime generation')
 def generate_primes(number_under_test):
-    number_under_test['primes'] = maxmin.generate_primes_under(number_under_test['number'])
+    number_under_test['primes'] = maxmin.generate_primes_under(
+        number_under_test['number']
+    )
 
 
 @then('it generates <primes> under it')
@@ -40,6 +42,7 @@ def generated_primes(number_under_test, primes):
     prime_generator = number_under_test['primes']
     for prime in prime_generator:
         assert index < len(prime_list), "Unexpected primes generated"
-        assert prime == prime_list[index], "Generated prime different than expected"
+        assert prime == prime_list[index],\
+            "Generated prime different than expected"
         index += 1
     assert index == len(prime_list), "More primes expected"

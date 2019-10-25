@@ -29,8 +29,10 @@ def pair_under_test(a, b):
 
 @when('LCM & GCD are calculated')
 def calculate_lcm_and_gcd(pair_under_test):
-    pair_under_test['lcm'] = maxmin.lcm(pair_under_test['a'], pair_under_test['b'])
-    pair_under_test['gcd'] = maxmin.gcd(pair_under_test['a'], pair_under_test['b'])
+    pair_under_test['lcm'] = maxmin.lcm(pair_under_test['a'],
+                                        pair_under_test['b'])
+    pair_under_test['gcd'] = maxmin.gcd(pair_under_test['a'],
+                                        pair_under_test['b'])
 
 
 @then('they are respectively equivalent to <lcm> and <gcd>')
