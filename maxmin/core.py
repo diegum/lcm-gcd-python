@@ -154,9 +154,24 @@ def generate_prime_factors__non_optimized(number: int) -> \
             last_prime = get_next_generated_value_or_none(primes)
 
 
+def avoid_race_condition(number_a: int, number_b: int) -> None:
+    """
+    Prime generation can't be run in parallel for two different numbers. For
+    that reason, we take the minimum of these numbers and just run it entirely.
+    It doesn't impact performance because when re-run, results are reused.
+    """
+    for _ in generate_prime_factors__optimized(
+            min(abs(number_a), abs(number_b))
+    ):
+        pass
+
+
 def gcd(number_a: int, number_b: int, dynamic=Global.DYNAMIC_DEFAULT) -> int:
     """Returns the greatest common divisor of its arguments."""
     result = 1
+
+    if dynamic:
+        avoid_race_condition(number_a, number_b)
 
     a_factors = generate_prime_factors(number_a, dynamic)
     b_factors = generate_prime_factors(number_b, dynamic)
@@ -180,6 +195,9 @@ def gcd(number_a: int, number_b: int, dynamic=Global.DYNAMIC_DEFAULT) -> int:
 def lcm(number_a: int, number_b: int, dynamic=Global.DYNAMIC_DEFAULT) -> int:
     """Returns the least common multiple of its arguments."""
     result = 1
+
+    if dynamic:
+        avoid_race_condition(number_a, number_b)
 
     a_factors = generate_prime_factors(number_a, dynamic)
     b_factors = generate_prime_factors(number_b, dynamic)
